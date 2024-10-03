@@ -1,0 +1,26 @@
+a=input()
+b=a[3:]
+a=a[:2] #a, b - координаты начала и конца движение фигуры, дойти от точки А до точки В
+figure=input()
+if a!=b:
+    move_ladya = a[0]==b[0] or a[1]==b[1]
+    move_rook = abs(ord(a[0])-ord(b[0]))==abs(int(a[1])-int(b[1]))
+    if figure=='пешка' and (a[0]==b[0] and int(a[1])==int(b[1])-1): #пешки ходят вперед на одну клетку
+        print('yes')
+    elif figure=='слон' and move_rook: 
+        print('yes')
+    elif figure=='конь' and (abs(ord(a[0])-ord(b[0])) + abs(int(a[1])-int(b[1]))==3 and abs(ord(a[0])-ord(b[0]))<3): #конь ходит буквой Г
+        print('yes')
+    elif figure=='король' and (abs(ord(a[0])-ord(b[0])) + abs(int(a[1])-int(b[1]))<3 and abs(ord(a[0])-ord(b[0]))<2): #король ходит в своем квадратике (если нет стенок, разумеется, но так как ввод корректен, это можно опустить), сдвиг по обеим координатам меньше 2
+        print('yes')
+    elif figure=='ладья' and move_ladya:
+        print('yes')
+    elif figure=='ферзь':
+        if move_ladya==0 and move_rook==0: #ферзь ходит по диагонали, вертикали и горизонтали
+            print('no')
+        else:
+            print('yes')
+    else:
+        print('no')
+else:
+    print('no')
